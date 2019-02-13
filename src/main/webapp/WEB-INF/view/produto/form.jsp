@@ -19,11 +19,21 @@
 		</div>
 		<div>
 			<label>Descrição</label>
-			<form:textarea path="descricao"/>
+			<form:textarea path="descricao" cols="20" rows="5"/>
 		</div>
 		<div>
 			<label>N. Páginas</label>
 			<form:input path="paginas"/>
+		</div>
+		<div>
+			<label>Data de Publicação</label>
+			<form:input path="dataPublicacao" type="date" />
+		</div>
+		<div>
+			<label>Status</label>
+			<form:select path="status">
+				<form:options items="${listStatus }" itemLabel="desc" />
+			</form:select>
 		</div>
 		<button type="submit">Salvar</button>
 	</form:form>

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.alura.spring.casadocodigo.dao.Banco;
 import br.com.alura.spring.casadocodigo.entity.Produto;
+import br.com.alura.spring.casadocodigo.entity.TipoStatus;
 
 @Controller
 @RequestMapping("/produto")
@@ -30,8 +31,11 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/form")
-	public String formCadastro(@ModelAttribute("produto") Produto produto) {
-		return "produto/form";
+	public ModelAndView formCadastro(@ModelAttribute("produto") Produto produto, ModelMap model) {
+		
+		model.addAttribute("listStatus", TipoStatus.values());
+		
+		return new ModelAndView("produto/form", model);
 	}
 	
 	@PostMapping(value="/salvar")
@@ -55,6 +59,15 @@ public class ProdutoController {
 		model.addAttribute("produto", produto);
 		
 		return new ModelAndView("produto/form", model);
+	}
+	
+	@GetMapping("/remover/{id}")
+	public String remover(@PathVariable("id") int id) {
+		
+		banco.removeProduto(id);
+		
+		return "redirect:/produto/";
+		
 	}
 	
 }

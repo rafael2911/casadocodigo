@@ -2,16 +2,19 @@ package br.com.alura.spring.casadocodigo.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import br.com.alura.spring.casadocodigo.controller.HomeController;
+import br.com.alura.spring.casadocodigo.controller.TipoStatusConverter;
 import br.com.alura.spring.casadocodigo.dao.Banco;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses= {HomeController.class, Banco.class})
-public class AppWebConfiguration {
+public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
@@ -21,5 +24,12 @@ public class AppWebConfiguration {
 		resolver.setViewClass(JstlView.class);
 		return resolver;
 	}
+
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addConverter(new TipoStatusConverter());
+	}
+	
+	
 	
 }
