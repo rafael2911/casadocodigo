@@ -25,13 +25,13 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr class="info">
-						<td>Id</td>
-						<td>Título</td>
-						<td>Descrição</td>
-						<td>Páginas</td>
-						<td>Publicação</td>
-						<td>Status</td>
-						<td>Ações</td>
+						<th>Id</th>
+						<th>Título</th>
+						<th>Descrição</th>
+						<th>Páginas</th>
+						<th>Publicação</th>
+						<th>Status</th>
+						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody>
