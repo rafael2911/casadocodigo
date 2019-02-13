@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.alura.spring.casadocodigo.dao.Banco;
 import br.com.alura.spring.casadocodigo.entity.Produto;
@@ -39,12 +40,14 @@ public class ProdutoController {
 	}
 	
 	@PostMapping(value="/salvar")
-	public String salvar(@ModelAttribute("produto") Produto produto) {
+	public String salvar(@ModelAttribute("produto") Produto produto, RedirectAttributes attr) {
 		
 		if(produto.getId() == 0) {
 			banco.adicionaProduto(produto);
+			attr.addFlashAttribute("message", "Produto cadastrado com sucesso!");
 		}else {
 			banco.atualizaProduto(produto);
+			attr.addFlashAttribute("message", "Produto atualizado com sucesso!");
 		}
 		
 		

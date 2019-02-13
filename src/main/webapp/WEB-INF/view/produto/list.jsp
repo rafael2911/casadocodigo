@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>Lista de produtos</h1>
-	<h3>Produto cadastrado com sucesso!!!</h3>
+	<h3>${message }</h3>
 	<br><br>
 	<table>
 		<thead>
