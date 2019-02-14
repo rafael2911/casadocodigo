@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:url var="bootstrap" value="/static/bootstrap_3_7/css/bootstrap.min.css" />
-<link rel="stylesheet" href="${bootstrap }">
+<c:url var="bootstrap" value="/static/bootstrap_3_7" />
+<link rel="stylesheet" href="${bootstrap }/css/bootstrap.min.css">
 <title>Produto - Casa do Código</title>
 </head>
 <body>
@@ -18,7 +18,10 @@
 		<a class="btn btn-default btn-sm" href="form">Novo</a>
 		<br><br>
 		<c:if test="${not empty message}">
-			<div class="alert alert-success" role="alert">${message }</div>
+			<div class="alert alert-success" role="alert">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				${message }
+			</div>
 		</c:if>
 		
 		<div class="table-responsive">
@@ -60,5 +63,7 @@
 		</div>
 	</div>
 	<div class="col-md-2"></div>
+	<script src="${bootstrap }/js/jquery-3.2.1.min.js"></script>
+	<script src="${bootstrap }/js/bootstrap.min.js"></script>
 </body>
 </html>
