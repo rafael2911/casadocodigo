@@ -2,17 +2,31 @@ package br.com.alura.spring.casadocodigo.entity;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class Produto {
 	
 	private int id;
+	
+	@NotBlank
+	@Size(min=3, max=50)
 	private String titulo;
+	
+	@NotBlank
+	@Size(min=10, max=200, message="Campo requerido entre {min} e {max} caracteres")
 	private String descricao;
+	
 	private int paginas;
+	
+	@NotNull(message="Campo obrigatório")
 	@DateTimeFormat(iso=ISO.DATE)
 	private LocalDate dataPublicacao;
+	
 	private TipoStatus status;
 	
 	public TipoStatus getStatus() {
