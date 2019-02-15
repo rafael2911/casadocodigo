@@ -58,4 +58,11 @@ public class ProdutoDao {
 		return query.getResultList();
 	}
 	
+	@Transactional(readOnly = true)
+    public List<Produto> getByTitulo(String titulo) {
+        TypedQuery<Produto> query = manager.createQuery("from Produto p where p.titulo like :titulo", Produto.class);
+        query.setParameter("titulo", "%"+titulo+"%");
+        return query.getResultList();
+    }
+	
 }

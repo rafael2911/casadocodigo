@@ -18,14 +18,25 @@
 		<hr>
 		<a class="btn btn-default btn-sm" href="form">Novo</a>
 		<hr>
-		<c:url var="busca" value="/produto/status" />
-		<form action="${busca }" method="get" class="row">
+		<c:url var="bStatus" value="/produto/status" />
+		<form action="${bStatus }" method="get" class="row">
 			<div class="col-md-4">
 				<select name="tipoStatus" class="form-control">
+					<option disabled selected>Busca por status</option>
 					<c:forEach items="${listStatus }" var="status">
 						<option value="${status.desc }">${status.desc }</option>
 					</c:forEach>
 				</select>
+			</div>
+			<div class="col-md-8">
+				<button type="submit" class="btn btn-default">Buscar</button>
+			</div>
+		</form>
+		<br>
+		<c:url var="bTitulo" value="/produto/titulo" />
+		<form action="${bTitulo }" method="get" class="row">
+			<div class="col-md-4">
+				<input type="text" name="titulo" class="form-control" placeholder="Buscar por Título">
 			</div>
 			<div class="col-md-8">
 				<button type="submit" class="btn btn-default">Buscar</button>

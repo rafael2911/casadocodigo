@@ -94,4 +94,13 @@ public class ProdutoController {
 		return new ModelAndView("produto/list", "produtos", produtoDao.getByStatus(tipoStatus));
 	}
 	
+	@GetMapping("/titulo")
+	public ModelAndView buscaPorStatus(String titulo) {
+		if(titulo == null) {
+			return new ModelAndView("redirect:/produto/");
+		}
+		
+		return new ModelAndView("produto/list", "produtos", produtoDao.getByTitulo(titulo));
+	}
+	
 }
