@@ -72,9 +72,11 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/remover/{id}")
-	public String remover(@PathVariable("id") int id) {
+	public String remover(@PathVariable("id") int id, RedirectAttributes attr) {
 		
 		produtoDao.removeProduto(id);
+		
+		attr.addFlashAttribute("message", "Produto removido com sucesso!");
 		
 		return "redirect:/produto/";
 		

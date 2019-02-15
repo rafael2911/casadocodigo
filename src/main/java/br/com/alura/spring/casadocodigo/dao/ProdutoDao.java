@@ -28,37 +28,26 @@ public class ProdutoDao {
 		return query.getResultList();
 	}
 	
+	@Transactional(readOnly = true)
 	public Produto getProduto(int id) {
-//		for (Produto produto : ProdutoDao.produtos) {
-//			if(produto.getId() == id)
-//				return produto;
-//		}
-		
-		return null;
+		TypedQuery<Produto> query = manager.createQuery("from Produto p where p.id = :id", Produto.class);
+		query.setParameter("id", id);
+		return query.getSingleResult();
 	}
 	
 	public int sizeProdutos() {
 //		return ProdutoDao.idProdutos;
 		return 0;
 	}
-
+	
+	@Transactional
 	public void atualizaProduto(Produto produto) {
-//		for (Produto p : produtos) {
-//			if(produto.getId() == p.getId()) {
-//				p.setTitulo(produto.getTitulo());
-//				p.setDescricao(produto.getDescricao());
-//				p.setPaginas(produto.getPaginas());
-//				p.setDataPublicacao(produto.getDataPublicacao());
-//				p.setStatus(produto.getStatus());
-//			}
-//		}
-		
+		manager.merge(produto);
 	}
 	
-	public void removeProduto(int id) {
-		
-//		ProdutoDao.produtos.removeIf(p -> p.getId() == id);
-		
+	@Transactional
+	public void removeProduto(int id) {	
+		manager.remove(manager.getReference(Produto.class, id));	
 	}
 	
 	
