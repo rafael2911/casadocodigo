@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.alura.spring.casadocodigo.dao.Banco;
+import br.com.alura.spring.casadocodigo.dao.ProdutoDao;
 import br.com.alura.spring.casadocodigo.entity.Produto;
 import br.com.alura.spring.casadocodigo.entity.TipoStatus;
 
@@ -25,11 +25,11 @@ import br.com.alura.spring.casadocodigo.entity.TipoStatus;
 public class ProdutoController {
 	
 	@Autowired
-	Banco banco;
+	ProdutoDao produtoDao;
 	
 	@GetMapping(value= {"", "/", "/index"})
 	public ModelAndView listar(ModelMap modelMap) {
-		List<Produto> produtos = banco.listProdutos();
+		List<Produto> produtos = produtoDao.listProdutos();
 		modelMap.addAttribute("produtos", produtos);
 		return new ModelAndView("produto/list", modelMap);
 	}
@@ -50,10 +50,10 @@ public class ProdutoController {
 		}
 		
 		if(produto.getId() == 0) {
-			banco.adicionaProduto(produto);
+			produtoDao.adicionaProduto(produto);
 			attr.addFlashAttribute("message", "Produto cadastrado com sucesso!");
 		}else {
-			banco.atualizaProduto(produto);
+			produtoDao.atualizaProduto(produto);
 			attr.addFlashAttribute("message", "Produto atualizado com sucesso!");
 		}
 		
@@ -65,7 +65,7 @@ public class ProdutoController {
 	@GetMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable("id") int id, ModelMap model) {
 		
-		Produto produto = banco.getProduto(id);
+		Produto produto = produtoDao.getProduto(id);
 		model.addAttribute("produto", produto);
 		
 		return new ModelAndView("produto/form", model);
@@ -74,7 +74,7 @@ public class ProdutoController {
 	@GetMapping("/remover/{id}")
 	public String remover(@PathVariable("id") int id) {
 		
-		banco.removeProduto(id);
+		produtoDao.removeProduto(id);
 		
 		return "redirect:/produto/";
 		

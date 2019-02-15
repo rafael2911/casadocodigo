@@ -13,10 +13,10 @@ import org.springframework.web.servlet.view.JstlView;
 
 import br.com.alura.spring.casadocodigo.controller.HomeController;
 import br.com.alura.spring.casadocodigo.controller.TipoStatusConverter;
-import br.com.alura.spring.casadocodigo.dao.Banco;
+import br.com.alura.spring.casadocodigo.dao.ProdutoDao;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses= {HomeController.class, Banco.class})
+@ComponentScan(basePackageClasses= {HomeController.class, ProdutoDao.class})
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Bean
