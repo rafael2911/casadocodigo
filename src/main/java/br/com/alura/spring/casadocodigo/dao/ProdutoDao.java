@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.alura.spring.casadocodigo.entity.Produto;
+import br.com.alura.spring.casadocodigo.entity.TipoStatus;
 
 @Repository
 public class ProdutoDao {
@@ -50,5 +51,11 @@ public class ProdutoDao {
 		manager.remove(manager.getReference(Produto.class, id));	
 	}
 	
+	@Transactional(readOnly = true)
+	public List<Produto> getByStatus(TipoStatus status){
+		TypedQuery<Produto> query = manager.createQuery("from Produto p where p.status = :status", Produto.class);
+		query.setParameter("status", status);
+		return query.getResultList();
+	}
 	
 }

@@ -27,6 +27,11 @@ public class ProdutoController {
 	@Autowired
 	ProdutoDao produtoDao;
 	
+	@ModelAttribute("listStatus")
+	public TipoStatus[] tipoStatus() {
+		return TipoStatus.values();
+	}
+	
 	@GetMapping(value= {"", "/", "/index"})
 	public ModelAndView listar(ModelMap modelMap) {
 		List<Produto> produtos = produtoDao.listProdutos();
@@ -36,8 +41,6 @@ public class ProdutoController {
 	
 	@GetMapping("/form")
 	public ModelAndView formCadastro(@ModelAttribute("produto") Produto produto, ModelMap model) {
-		
-		model.addAttribute("listStatus", TipoStatus.values());
 		
 		return new ModelAndView("produto/form", model);
 	}
@@ -80,6 +83,15 @@ public class ProdutoController {
 		
 		return "redirect:/produto/";
 		
+	}
+	
+	@GetMapping("/status")
+	public ModelAndView buscaPorStatus(TipoStatus tipoStatus) {
+		if(tipoStatus == null) {
+			return new ModelAndView("redirect:/produto/");
+		}
+		
+		return new ModelAndView("produto/list", "produtos", produtoDao.getByStatus(tipoStatus));
 	}
 	
 }

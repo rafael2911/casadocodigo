@@ -15,8 +15,23 @@
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<h1>Lista de produtos</h1>
+		<hr>
 		<a class="btn btn-default btn-sm" href="form">Novo</a>
-		<br><br>
+		<hr>
+		<c:url var="busca" value="/produto/status" />
+		<form action="${busca }" method="get" class="row">
+			<div class="col-md-4">
+				<select name="tipoStatus" class="form-control">
+					<c:forEach items="${listStatus }" var="status">
+						<option value="${status.desc }">${status.desc }</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="col-md-8">
+				<button type="submit" class="btn btn-default">Buscar</button>
+			</div>
+		</form>
+		<hr>
 		<c:if test="${not empty message}">
 			<div class="alert alert-success" role="alert">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
